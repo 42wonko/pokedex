@@ -4,7 +4,10 @@ import { commandExit } from "./command_exit.js";
 import { commandHelp } from "./command_help.js";
 import { commandMap } from "./command_map.js";
 import { commandMapB } from "./command_map_b.js";
-import { commandExplore} from "./command_explore.js";
+import { commandExplore } from "./command_explore.js";
+import { commandCatch } from "./command_catch.js";
+import { commandInspect } from "./command_inspect.js";
+import { commandPokedex} from "./command_pokedex.js";
 
 export async function startREPL(state: State){
     const rl = state.interface;
@@ -36,6 +39,16 @@ export async function startREPL(state: State){
                 } catch (e) {
                     console.log("Network Error");
                 }
+            } else if(words[0] == "catch"){
+                try {
+                    await commandCatch(state, words[1]);
+                } catch (e) {
+                    console.log("Network Error");
+                }
+            } else if(words[0] == "inspect"){
+                await commandInspect(state, words[1]);
+            } else if(words[0] == "pokedex"){
+                await commandPokedex(state);
             } else {
                 console.log("Unknown command");
             }
